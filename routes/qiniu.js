@@ -22,4 +22,6 @@ router.get('/token', function(req, res, next) {
     res.send(data);
 });
 
+
+
 module.exports = router;
