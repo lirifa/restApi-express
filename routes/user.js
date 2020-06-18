@@ -2,14 +2,16 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var fs = require('fs'); // 载入fs模块
-
-
+const Token = require('../utils/token.js');
+const verifyToken = require('../auth/VerifyToken')
 // 用户注册
-router.post('/register', (req, res) => {
+router.post('/register', verifyToken, (req, res) => {
     let user = require('../controllers/user');
+    console.log(req);
     let info = {
         name: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        permission_role: req.permission_role
     };
     user.register(info).then(result => {
         res.json(result);
