@@ -18,7 +18,6 @@ function verifyToken(req, res, next) {
         req.permission_role = decoded.permission_role;
         next();
     });
-
 }
 
 module.exports = verifyToken;
