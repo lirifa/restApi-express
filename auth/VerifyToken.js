@@ -4,7 +4,7 @@ var tokenConfig = require('../config/token.js'); // get our config file
 function verifyToken(req, res, next) {
 
     // check header or url parameters or post parameters for token
-    var token = req.headers['x-access-token'];
+    var token = req.headers['x-token'];
     if (!token)
         return res.json({ code: 403, msg: 'No token provided.' });
 
