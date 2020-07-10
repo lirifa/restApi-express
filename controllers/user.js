@@ -97,7 +97,7 @@ class User {
   list(json) {
     return new Promise((resolve, reject) => {
       if (json.permission_role === '1') {
-        this.db.select(['id', 'username', 'name', 'status', 'permission_role', 'gender', 'phone', 'remark'], 'user', {permission_role: 0}).then(result => {
+        this.db.select(['id', 'username', 'name', 'status', 'permission_role', 'gender', 'phone', 'create_dt', 'remark'], 'user', {permission_role: 0}).then(result => {
           resolve({code: 200, msg: '操作成功', data: result })
         }).catch(err => {
           reject({code: -1, msg: '操作数据库失败'});
@@ -112,6 +112,20 @@ class User {
     return new Promise((resolve, reject) => {
       if (json.permission_role === '1') {
         this.db.update({status: json.data.status}, 'user', {id: json.data.id}).then(result => {
+          resolve({code: 200, msg: '操作成功'});
+        }).catch(err => {
+          reject({code: -1, msg: '操作数据库失败'});
+        });
+      } else {
+        reject({code: -1, msg: '权限不足'});
+      }
+    });
+  }
+
+  edit(json) {
+    return new Promise((resolve, reject) => {
+      if (json.permission_role === '1') {
+        this.db.update({...json.data}, 'user', {id: json.data.id}).then(result => {
           resolve({code: 200, msg: '操作成功'});
         }).catch(err => {
           reject({code: -1, msg: '操作数据库失败'});

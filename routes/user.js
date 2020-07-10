@@ -48,7 +48,6 @@ router.get('/info', verifyToken, function(req, res) {
     id = req.userId
   }
   user.info(id).then(result => {
-    console.log(res);
     res.json(result);
   }).catch(err => {
     res.json(err);
@@ -88,6 +87,19 @@ router.post('/switchStatus', verifyToken, (req, res) => {
     permission_role: req.permission_role
   };
   user.switchStatus(info).then(result => {
+    res.json(result);
+  }).catch(err => {
+    res.json(err);
+  });
+});
+
+// 店员信息修改
+router.post('/edit', verifyToken, (req, res) => {
+  let info = {
+    data: req.body,
+    permission_role: req.permission_role
+  };
+  user.edit(info).then(result => {
     res.json(result);
   }).catch(err => {
     res.json(err);
