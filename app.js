@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
 var qnRouter = require('./routes/qiniu');
 var storeRouter = require('./routes/store');
+var uploadRouter = require('./routes/upload');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/qiniu', qnRouter);
 app.use('/store', storeRouter);
+app.use('/upload', uploadRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
